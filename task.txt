@@ -1,0 +1,35 @@
+Creați un tool care monitorizeaza serialele favorite. Într-o bază de date se va păstra numele
+serialului, link către IMDB, ultimul episod vizionat, data ultimei vizionari, un scor (setat de
+user pentru serial). Cand va fi rulat, tool-ul va lista ce episoade nou apărute nu au fost vizionate
+în funcție de scorul serialului. Tool-ul va cauta si trailer-uri pe youtube sau upload-uri care au
+legatura cu un anumit episod dintr-un serial și va oferi o lista a acestora (respectiv notificari
+dacă apar altele).
+
+INPUT:
+Adaugare serial (link imdb si scor)
+Sergere serial
+Modificare scor
+Snooze/Unsnooze (dacă e snoozed un serial nu va apărea în lista de seriale cu episoade noi)
+Listare - va lista toate episoadele noi ale serialelor din db (mai puțin cele snoozed)
+
+OUTPUT:
+Rezultatul comenzilor împreuna cu logarea activităților și erorile apărute
+
+
+70 points
+Full Functionality
+Git Support
+Git Features Updates
+PEP documentation
+Presented until Week 14 (11-15 Jan 2021)
+
+RESOURCES AND NOTES
+
+OMDB API key: 8ed1e7e8 // apikey=API_KEY
+Youtube API key: AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4 // key=API_KEY
+
+https://developers.google.com/youtube/v3/sharch?key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4&part=snippet&maxResults=25&q=
+
+example:
+
+https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=handmaid%27s%20tale&key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4
