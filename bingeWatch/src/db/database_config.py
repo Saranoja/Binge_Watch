@@ -1,0 +1,5 @@
+PGHOST = "127.0.0.1"
+PGUSER = "postgres"
+PGPASSWORD = "postgres"
+PGPORT = "5432"
+PGDATABASE = "BingeWatch"
