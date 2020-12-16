@@ -32,6 +32,8 @@ https://developers.google.com/youtube/v3/sharch?key=AIzaSyBEslP72LahagTyaHAFKqVp
 
 example:
 
+https://www.tvmaze.com/search?q=friends => get data-key
+
 http://www.omdbapi.com/?t=handmaid%27s%20tale&apikey=8ed1e7e8
 
 https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=handmaid%27s%20tale&key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4
