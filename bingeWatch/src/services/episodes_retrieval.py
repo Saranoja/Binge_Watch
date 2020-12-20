@@ -7,9 +7,7 @@ BASE_URL = "http://api.tvmaze.com/shows/"
 ROUTE = "/episodes"
 
 
-# TODO: map json to contain only episode name, season, number and airdate + filter result to have airdate < current_date
-
-def get_last_episode(series_name):
+def get_series_episodes(series_name):
     series_id = get_series_id_from_name(series_name)
 
     url = f"{BASE_URL}{series_id}{ROUTE}"

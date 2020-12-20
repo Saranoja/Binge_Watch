@@ -26,8 +26,9 @@ if __name__ == "__main__":
     engine = connection.engine
     with session_scope() as current_session:
         tv_repo = TV_show_repository(current_session)
-        for show in tv_repo.get_all_shows():
-            print(f'Show with id {show.id}, name {show.name}, link {show.imdb_link}')
+        for show in tv_repo.get_not_snoozed_shows():
+            print(
+                f'Show with id {show.id}, name {show.name}, link {show.imdb_link}, is snoozed {show.is_snoozed}')
 
         # new_show = TV_show(28, "my banana show", "whatever link")
         # new_show.set_last_viewed_episode("S04E23")

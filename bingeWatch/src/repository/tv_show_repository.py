@@ -8,6 +8,10 @@ class TV_show_repository:
     def get_all_shows(self) -> list:
         return self.session.query(TV_show).all()
 
+    def get_not_snoozed_shows(self) -> list:
+        all_shows = self.get_all_shows()
+        return filter(lambda show: show.is_snoozed is False, all_shows)
+
     def insert_show(self, tv_show: TV_show):
         self.session.add(tv_show)
         self.session.commit()
