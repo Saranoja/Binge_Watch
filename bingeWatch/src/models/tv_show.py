@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class TV_show(Base):
+class TvShow(Base):
     __tablename__ = "TV_Shows"
     id = Column("id", Integer, primary_key=True)
     name = Column("name", String, nullable=False)
