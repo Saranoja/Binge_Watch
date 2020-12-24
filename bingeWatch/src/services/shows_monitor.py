@@ -11,7 +11,7 @@ def get_unwatched_episodes(shows_repository: TvShowRepository) -> dict:
         if number and season:
             unseen_episodes = []
             for episode in show_episodes:
-                if season <= episode['season'] and number < episode['number']:
+                if season < episode['season'] or (season == episode['season'] and number < episode['number']):
                     unseen_episodes.append(episode)
             if unseen_episodes:
                 new_episodes[show.name] = unseen_episodes
