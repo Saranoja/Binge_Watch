@@ -13,7 +13,7 @@ class TvShowRepository:
         return self.session.query(TvShow).filter_by(is_snoozed='False').all()
 
     def get_last_seen_episode_for_show(self, show_name):
-        return self.session.query(TvShow.last_viewed_episode).filter(
+        return self.session.query(TvShow.last_viewed_episode_number, TvShow.last_viewed_episode_season).filter(
             func.lower(TvShow.name) == show_name.lower()).one()
 
     def set_snoozed_for_show(self, show_name, snoozed_value):
@@ -25,9 +25,11 @@ class TvShowRepository:
         self.session.add(tv_show)
         self.session.commit()
 
-    def update_last_viewed_episode(self, show_name, last_episode):
+    def update_last_viewed_episode(self, show_name, last_episode_number, last_episode_season):
         self.session.query(TvShow).filter(TvShow.name == show_name).update(
-            {TvShow.last_viewed_episode: last_episode}, synchronize_session=False)
+            {TvShow.last_viewed_episode_number: last_episode_number}, synchronize_session=False)
+        self.session.query(TvShow).filter(TvShow.name == show_name).update(
+            {TvShow.last_viewed_episode_season: last_episode_season}, synchronize_session=False)
         self.session.commit()
 
     def update_last_viewed_date(self, show_name, last_viewed_date):
