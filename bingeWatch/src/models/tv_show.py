@@ -15,8 +15,7 @@ class TvShow(Base):
     score = Column("score", Integer)
     is_snoozed = Column("is_snoozed", Boolean, nullable=False)
 
-    def __init__(self, id, name, imdb_link, is_snoozed=False):
-        self.id = id
+    def __init__(self, name, imdb_link, is_snoozed=False):
         self.name = name
         self.imdb_link = imdb_link
         self.last_viewed_episode = None
