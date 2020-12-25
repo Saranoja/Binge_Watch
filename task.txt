@@ -37,3 +37,5 @@ https://www.tvmaze.com/search?q=friends => get data-key
 http://www.omdbapi.com/?t=handmaid%27s%20tale&apikey=8ed1e7e8
 
 https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=handmaid%27s%20tale&key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4
+
+https://www.googleapis.com/youtube/v3/search?&key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4&part=snippet&maxResults=25&q=queen%27s%20gambit%20s1e3%20trailer
