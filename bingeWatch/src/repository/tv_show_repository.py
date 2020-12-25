@@ -26,6 +26,10 @@ class TvShowRepository:
             {TvShow.score: score_value}, synchronize_session=False)
         self.session.commit()
 
+    def get_score_for_show(self, show_name):
+        return self.session.query(TvShow.score).filter(
+            func.lower(TvShow.name) == show_name.lower()).one()
+
     def insert_show(self, tv_show: TvShow):
         self.session.add(tv_show)
         self.session.commit()
