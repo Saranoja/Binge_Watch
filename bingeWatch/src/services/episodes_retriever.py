@@ -1,5 +1,5 @@
-import requests
-import json
+from requests import get
+from json import loads
 from datetime import datetime
 from bingeWatch.src.services.tvmaze_scraper import get_series_id_from_name
 
@@ -12,9 +12,9 @@ def get_series_episodes(series_name):
 
     url = f"{BASE_URL}{series_id}{ROUTE}"
 
-    response = requests.request("GET", url)
+    response = get(url)
 
-    all_episodes = json.loads(response.text)
+    all_episodes = loads(response.text)
 
     aired_episodes = [ep for ep in all_episodes if
                       ep['airdate'] != "" and datetime.strptime(ep['airdate'], "%Y-%m-%d") < datetime.today()]

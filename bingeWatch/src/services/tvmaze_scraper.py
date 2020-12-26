@@ -1,4 +1,4 @@
-import requests
+from requests import get
 from bs4 import BeautifulSoup
 
 SEARCH_BASE_URL = 'https://www.tvmaze.com/search?q='
@@ -6,7 +6,7 @@ SEARCH_BASE_URL = 'https://www.tvmaze.com/search?q='
 
 def get_series_id_from_name(series_name):
     URL = f"{SEARCH_BASE_URL}{series_name}"
-    page = requests.get(URL)
+    page = get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
     series_id = -1

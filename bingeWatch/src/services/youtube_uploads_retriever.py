@@ -1,5 +1,5 @@
-import requests
-import json
+from requests import get
+from json import loads
 
 API_BASE_URL = "https://www.googleapis.com/youtube/v3/search?"
 API_KEY = "key=AIzaSyBEslP72LahagTyaHAFKqVpv4Lh8fbxyi4"
@@ -11,8 +11,8 @@ YOUTUBE_VIDEOS_BASE_URL = "https://www.youtube.com/watch?v="
 def get_uploads_for_episode(series_name, episode_season, episode_number, max_results=5):
     search_query = f"q={series_name}%20S{episode_season}E{episode_number}"
     url = f"{API_BASE_URL}{API_KEY}&{PART}&{MAX_RESULTS}{max_results}&{search_query}"
-    response = requests.request("GET", url)
-    youtube_uploads = json.loads(response.text)
+    response = get(url)
+    youtube_uploads = loads(response.text)
     youtube_ids = map(
         lambda video: video["id"]["videoId"] if video["id"]["kind"] == "youtube#video" else video["id"]["playlistId"],
         youtube_uploads["items"])
