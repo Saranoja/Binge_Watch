@@ -16,6 +16,9 @@ class TvShowRepository:
         return self.session.query(TvShow.last_viewed_episode_number, TvShow.last_viewed_episode_season).filter(
             func.lower(TvShow.name) == show_name.lower()).one()
 
+    def is_show_in_db(self, show_name):
+        return self.session.query(TvShow.id).filter(func.lower(TvShow.name) == show_name.lower()).scalar() is not None
+
     def set_snoozed_for_show(self, show_name, snoozed_value):
         self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
             {TvShow.is_snoozed: snoozed_value}, synchronize_session=False)
