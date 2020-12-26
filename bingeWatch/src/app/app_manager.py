@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from bingeWatch.src.repository.tv_show_repository import TvShowRepository
 from contextlib import contextmanager
 from bingeWatch.src.app.interactive_shell import InteractiveShell
+from sqlalchemy import exc
 
 
 @contextmanager
@@ -14,7 +15,7 @@ def session_scope():
     try:
         yield session
         session.commit()
-    except:
+    except exc.SQLAlchemyError:
         session.rollback()
         raise
     finally:
