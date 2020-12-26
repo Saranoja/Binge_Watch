@@ -1,13 +1,13 @@
 from bingeWatch.src.repository.tv_show_repository import TvShowRepository
 from bingeWatch.src.services.shows_monitor import get_unwatched_episodes
-from bingeWatch.src.services.json_printer import print_json
+from bingeWatch.src.services.episodes_printer import print_episodes
 from bingeWatch.src.services.youtube_uploads_retriever import get_uploads_for_episode
 from bingeWatch.src.services.uploads_printer import print_youtube_uploads
 from bingeWatch.src.models.tv_show import TvShow
 from sys import exit
 
 
-class InteractiveShell():
+class InteractiveShell:
     def __init__(self, tv_repo: TvShowRepository):
         self.tv_repo = tv_repo
         self.input = ""
@@ -26,7 +26,7 @@ class InteractiveShell():
 
     def show_new_episodes(self):
         unwatched_episodes = get_unwatched_episodes(self.tv_repo)
-        print_json(unwatched_episodes)
+        print_episodes(unwatched_episodes)
 
     def get_youtube_uploads(self):
         series_name = input("type series name: ")

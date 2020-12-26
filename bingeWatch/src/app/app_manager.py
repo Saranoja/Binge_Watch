@@ -23,7 +23,8 @@ def session_scope():
 
 
 if __name__ == "__main__":
-    connection = DatabaseConnection(config.PGUSER, config.PGPASSWORD, config.PGHOST, config.PGPORT, config.PGDATABASE)
+    connection = DatabaseConnection.getInstance(config.PGUSER, config.PGPASSWORD, config.PGHOST, config.PGPORT,
+                                                config.PGDATABASE)
     engine = connection.engine
     with session_scope() as current_session:
         tv_repo = TvShowRepository(current_session)

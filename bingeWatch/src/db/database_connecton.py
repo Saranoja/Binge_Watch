@@ -1,16 +1,16 @@
 from sqlalchemy import create_engine
-import logging
+from logging import getLogger
 
-log = logging.getLogger(__name__)
+log = getLogger(__name__)
 
 
 class DatabaseConnection:
     __instance = None
 
     @staticmethod
-    def getInstance():
+    def getInstance(user, password, host, port, db):
         if DatabaseConnection.__instance is None:
-            DatabaseConnection()
+            DatabaseConnection(user, password, host, port, db)
         return DatabaseConnection.__instance
 
     def __init__(self, user, password, host, port, db):

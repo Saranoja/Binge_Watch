@@ -12,7 +12,7 @@ def get_series_id_from_name(series_name):
     series_id = -1
 
     for id in soup.find_all('div'):
-        if id.get('data-key') is not None:
+        if id.get('data-key'):
             series_id = id.get('data-key')
             break
 

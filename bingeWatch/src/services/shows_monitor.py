@@ -1,8 +1,8 @@
 from bingeWatch.src.repository.tv_show_repository import TvShowRepository
-from bingeWatch.src.services.episodes_retrieval import get_series_episodes
+from bingeWatch.src.services.episodes_retriever import get_series_episodes
 
 
-def order_score(score):
+def update_none_for_score(score):
     if score is None:
         return -10
     else:
@@ -11,7 +11,7 @@ def order_score(score):
 
 def get_unwatched_episodes(shows_repository: TvShowRepository) -> dict:
     unsnoozed_shows = shows_repository.get_not_snoozed_shows()
-    unsnoozed_shows = sorted(unsnoozed_shows, key=lambda k: order_score(k.score), reverse=True)
+    unsnoozed_shows = sorted(unsnoozed_shows, key=lambda k: update_none_for_score(k.score), reverse=True)
     new_episodes = {}
     for show in unsnoozed_shows:
         show_episodes = get_series_episodes(show.name)
