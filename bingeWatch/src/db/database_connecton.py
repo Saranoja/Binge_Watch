@@ -8,12 +8,12 @@ class DatabaseConnection:
     __instance = None
 
     @staticmethod
-    def getInstance(user, password, host, port, db):
+    def getInstance(user: str, password: str, host: str, port: str, db: str) -> "DatabaseConnection":
         if DatabaseConnection.__instance is None:
             DatabaseConnection(user, password, host, port, db)
         return DatabaseConnection.__instance
 
-    def __init__(self, user, password, host, port, db):
+    def __init__(self, user: str, password: str, host: str, port: str, db: str):
         if DatabaseConnection.__instance is not None:
             raise Exception("Trying to create multiple instances of a singleton")
         else:

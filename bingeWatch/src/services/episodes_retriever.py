@@ -2,12 +2,13 @@ from requests import get
 from json import loads
 from datetime import datetime
 from bingeWatch.src.services.tvmaze_scraper import get_series_id_from_name
+from typing import List, Dict, Any
 
 BASE_URL = "http://api.tvmaze.com/shows/"
 ROUTE = "/episodes"
 
 
-def get_series_episodes(series_name):
+def get_series_episodes(series_name: str) -> List[Dict[str, Any]]:
     series_id = get_series_id_from_name(series_name)
 
     url = f"{BASE_URL}{series_id}{ROUTE}"

@@ -8,7 +8,7 @@ from sqlalchemy import exc
 
 
 @contextmanager
-def session_scope():
+def session_scope() -> None:
     """Provide a transactional scope around a series of operations."""
     Session = sessionmaker(bind=engine)
     session = Session()

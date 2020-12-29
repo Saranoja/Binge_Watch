@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 SEARCH_BASE_URL = 'https://www.tvmaze.com/search?q='
 
 
-def get_series_id_from_name(series_name):
+def get_series_id_from_name(series_name: str) -> int:
     URL = f"{SEARCH_BASE_URL}{series_name}"
     page = get(URL)
 

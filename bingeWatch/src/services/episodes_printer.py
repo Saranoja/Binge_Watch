@@ -1,4 +1,4 @@
-def print_episodes(series_dict: dict):
+def print_episodes(series_dict: dict) -> None:
     for series_title, episodes in series_dict.items():
         print(f'Show title: {series_title} - Unwatched episodes:')
         for episode in episodes:
