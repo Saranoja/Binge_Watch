@@ -1,9 +1,5 @@
-from bingeWatch.src.repository.tv_show_repository import TvShowRepository
-from bingeWatch.src.services.shows_monitor import get_unwatched_episodes
-from bingeWatch.src.services.episodes_printer import print_episodes
-from bingeWatch.src.services.youtube_uploads_retriever import get_uploads_for_episode
-from bingeWatch.src.services.uploads_printer import print_youtube_uploads
-from bingeWatch.src.models.tv_show import TvShow
+from bingeWatch.src import TvShowRepository, TvShow
+from bingeWatch.src import get_unwatched_episodes, print_episodes, get_uploads_for_episode, print_youtube_uploads
 from sys import exit
 from datetime import datetime
 import logging
@@ -60,7 +56,7 @@ class InteractiveShell:
     def print_initial(self) -> None:
         print("""type in one of the following commands:
                     -show new episodes
-                    -get youtube uploads
+                    -show youtube uploads
                     -update last episode
                     -add show
                     -set snoozed flag
@@ -75,23 +71,30 @@ class InteractiveShell:
 
     def show_youtube_uploads(self) -> None:
         series_name = input("type show name: ")
-        episode_season = input("type episode season: ")
-        episode_number = input("type episode number: ")
-        uploads_count = input("type number of results: ")
-        resulted_uploads = get_uploads_for_episode(series_name, episode_season, episode_number, uploads_count)
-        print_youtube_uploads(series_name, resulted_uploads)
+        while True:
+            try:
+                episode_season = int(input("type episode season: "))
+                episode_number = int(input("type episode number: "))
+                uploads_count = int(input("type number of results: "))
+                resulted_uploads = get_uploads_for_episode(series_name, episode_season, episode_number, uploads_count)
+                print_youtube_uploads(series_name, resulted_uploads)
+                break
+            except ValueError:
+                logging.error("these values should be numbers")
 
     def update_last_episode(self) -> None:
         series_name = self.read_valid_show_name()
-        try:
-            episode_season = int(input("type episode season: "))
-            episode_number = int(input("type episode number: "))
-            last_seen_date = self.read_valid_date()
-            self.tv_repo.update_last_viewed_episode(series_name, episode_season, episode_number)
-            self.tv_repo.update_last_viewed_date(series_name, last_seen_date)
-            logging.info("update successful")
-        except ValueError:
-            logging.error("season and episode should be numbers")
+        while True:
+            try:
+                episode_season = int(input("type episode season: "))
+                episode_number = int(input("type episode number: "))
+                last_seen_date = self.read_valid_date()
+                self.tv_repo.update_last_viewed_episode(series_name, episode_season, episode_number)
+                self.tv_repo.update_last_viewed_date(series_name, last_seen_date)
+                logging.info("update successful")
+                break
+            except ValueError:
+                logging.error("season and episode should be numbers")
 
     def add_show(self) -> None:
         series_name = input("type show name: ")

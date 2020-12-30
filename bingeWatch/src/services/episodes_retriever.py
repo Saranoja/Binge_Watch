@@ -1,7 +1,7 @@
 from requests import get
 from json import loads
 from datetime import datetime
-from bingeWatch.src.services.tvmaze_scraper import get_series_id_from_name
+from bingeWatch.src import get_series_id_from_name
 from typing import List, Dict, Any
 
 BASE_URL = "http://api.tvmaze.com/shows/"

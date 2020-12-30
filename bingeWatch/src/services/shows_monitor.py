@@ -1,5 +1,4 @@
-from bingeWatch.src.repository.tv_show_repository import TvShowRepository
-from bingeWatch.src.services.episodes_retriever import get_series_episodes
+from bingeWatch.src import TvShowRepository, get_series_episodes
 from typing import Dict, List, Any
 
 

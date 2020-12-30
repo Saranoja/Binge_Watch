@@ -1,4 +1,4 @@
-from bingeWatch.src.models.tv_show import TvShow
+from bingeWatch.src import TvShow
 from sqlalchemy import func
 from typing import Tuple, List
 
