@@ -1,3 +1,4 @@
+""" Module containing the constants used for database connection. """
 PGHOST = "127.0.0.1"
 PGUSER = "postgres"
 PGPASSWORD = "postgres"

@@ -9,6 +9,12 @@ ROUTE = "/episodes"
 
 
 def get_series_episodes(series_name: str) -> List[Dict[str, Any]]:
+    """
+    Performs a request to the TvMaze API and gets all the already-aired episodes of a series.
+
+    :param series_name: the name of the tv show
+    :return: a filtered list of dictionaries containing the relevant details of each aired episode
+    """
     series_id = get_series_id_from_name(series_name)
 
     url = f"{BASE_URL}{series_id}{ROUTE}"
