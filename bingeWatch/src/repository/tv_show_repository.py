@@ -32,6 +32,8 @@ class TvShowRepository:
         Returns the score value from the database for a certain show.
     insert_show(tv_show):
         Inserts a new tv show into the database.
+    remove_show(show_name):
+        Removes a show from the database.
     update_last_viewed_episode(show_name, last_episode_season, last_episode_number):
         Sets the last viewed episode for a certain tv show in the database.
     update_last_viewed_date(show_name, last_viewed_date):
@@ -113,6 +115,16 @@ class TvShowRepository:
         :return: None
         """
         self.session.add(tv_show)
+        self.session.commit()
+
+    def remove_show(self, show_name: str) -> None:
+        """
+        Removes a show from the database.
+
+        :param show_name: the name of the show to be removed
+        :return: None
+        """
+        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).delete(synchronize_session=False)
         self.session.commit()
 
     def update_last_viewed_episode(self, show_name: str, last_episode_season: int, last_episode_number: int) -> None:

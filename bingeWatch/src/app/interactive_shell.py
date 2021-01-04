@@ -48,6 +48,8 @@ class InteractiveShell:
             Updates the last viewed episode of a tv show in the database.
         add_show()
             Adds a new show in the database.
+        remove_show()
+            Removes a show from the database.
         set_snoozed_flag()
             Sets the snoozed flag for a certain tv show.
         update_score()
@@ -124,6 +126,7 @@ class InteractiveShell:
                     -show youtube uploads
                     -update last episode
                     -add show
+                    -remove show
                     -set snoozed flag
                     -update score
                     -exit""")
@@ -189,6 +192,16 @@ class InteractiveShell:
         self.tv_repo.insert_show(new_show)
         logging.info("insertion complete")
 
+    def remove_show(self) -> None:
+        """
+        Removes a show from the database.
+
+        :return: None
+        """
+        series_name = input("type show name: ")
+        self.tv_repo.remove_show(series_name)
+        logging.info("removal complete")
+
     def set_snoozed_flag(self) -> None:
         """
         Sets the snoozed flag for a certain tv show.
@@ -223,7 +236,7 @@ class InteractiveShell:
         :return: None
         """
         valid_commands = ['show new episodes', 'show youtube uploads', 'update last episode',
-                          'add show', 'set snoozed flag', 'update score', 'exit']
+                          'add show', 'remove show', 'set snoozed flag', 'update score', 'exit']
         command = command.lower()
         if command not in valid_commands:
             logging.error("unknown command")
