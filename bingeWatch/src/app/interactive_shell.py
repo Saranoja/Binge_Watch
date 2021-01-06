@@ -174,7 +174,6 @@ class InteractiveShell:
                 last_seen_date = self.read_valid_date()
                 self.tv_repo.update_last_viewed_episode(series_name, episode_season, episode_number)
                 self.tv_repo.update_last_viewed_date(series_name, last_seen_date)
-                logging.info("update successful")
                 break
             except ValueError:
                 logging.error("season and episode should be numbers")
@@ -190,7 +189,6 @@ class InteractiveShell:
         is_snoozed = convert_to_bool(input("snoozed status: "))
         new_show = TvShow(series_name, imdb_link, is_snoozed)
         self.tv_repo.insert_show(new_show)
-        logging.info("insertion complete")
 
     def remove_show(self) -> None:
         """
@@ -200,7 +198,6 @@ class InteractiveShell:
         """
         series_name = input("type show name: ")
         self.tv_repo.remove_show(series_name)
-        logging.info("removal complete")
 
     def set_snoozed_flag(self) -> None:
         """
@@ -213,7 +210,6 @@ class InteractiveShell:
             try:
                 is_snoozed = convert_to_bool(input("update snoozed status to: "))
                 self.tv_repo.set_snoozed_for_show(series_name, is_snoozed)
-                logging.info("update successful")
                 break
             except ValueError:
                 logging.error("value should be boolean")
@@ -227,7 +223,6 @@ class InteractiveShell:
         series_name = self.read_valid_show_name()
         score = self.read_valid_score()
         self.tv_repo.update_score_for_show(series_name, score)
-        logging.info("update successful")
 
     def solve_command(self, command: str) -> None:
         """

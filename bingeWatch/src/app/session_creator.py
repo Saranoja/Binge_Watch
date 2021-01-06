@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from bingeWatch.src import database_config as config
 from bingeWatch.src import DatabaseConnection
+import logging
 
 
 @contextmanager
@@ -18,6 +19,7 @@ def session_scope() -> None:
         session.commit()
     except exc.SQLAlchemyError:
         session.rollback()
-        raise
+        logging.exception("SQLAlchemy Error - Could not create session - Rollback done.")
     finally:
         session.close()
+        logging.info("Session closed.")

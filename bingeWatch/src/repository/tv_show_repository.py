@@ -2,6 +2,8 @@ from bingeWatch.src import TvShow
 from sqlalchemy import func
 from typing import Tuple, List
 from sqlalchemy.orm import Session
+from sqlalchemy import exc
+import logging
 
 
 class TvShowRepository:
@@ -83,9 +85,14 @@ class TvShowRepository:
         :param snoozed_value: boolean value for the snooze flag
         :return: None
         """
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
-            {TvShow.is_snoozed: snoozed_value}, synchronize_session=False)
-        self.session.commit()
+        try:
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
+                {TvShow.is_snoozed: snoozed_value}, synchronize_session=False)
+            self.session.commit()
+            logging.info("Snoozed flag uppdate successful.")
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not set the snoozed flag. Rollback done.")
 
     def update_score_for_show(self, show_name: str, score_value: int) -> None:
         """
@@ -95,9 +102,14 @@ class TvShowRepository:
         :param score_value: number value to mark how good the tv show is
         :return: None
         """
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
-            {TvShow.score: score_value}, synchronize_session=False)
-        self.session.commit()
+        try:
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
+                {TvShow.score: score_value}, synchronize_session=False)
+            self.session.commit()
+            logging.info("Score update successful.")
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not set the score. Rollback done.")
 
     def get_score_for_show(self, show_name: str) -> int:
         """
@@ -114,8 +126,13 @@ class TvShowRepository:
         :param tv_show: a tv show object to insert in the database
         :return: None
         """
-        self.session.add(tv_show)
-        self.session.commit()
+        try:
+            self.session.add(tv_show)
+            self.session.commit()
+            logging.info(f'Show added successfully.')
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not add show. Rollback done.")
 
     def remove_show(self, show_name: str) -> None:
         """
@@ -124,8 +141,14 @@ class TvShowRepository:
         :param show_name: the name of the show to be removed
         :return: None
         """
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).delete(synchronize_session=False)
-        self.session.commit()
+        try:
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).delete(
+                synchronize_session=False)
+            self.session.commit()
+            logging.info("Show removed successfully.")
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not remove show. Rollback done.")
 
     def update_last_viewed_episode(self, show_name: str, last_episode_season: int, last_episode_number: int) -> None:
         """
@@ -136,11 +159,16 @@ class TvShowRepository:
         :param last_episode_number: number to specify the episode number for the last viewed episode
         :return: None
         """
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
-            {TvShow.last_viewed_episode_number: last_episode_number}, synchronize_session=False)
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
-            {TvShow.last_viewed_episode_season: last_episode_season}, synchronize_session=False)
-        self.session.commit()
+        try:
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
+                {TvShow.last_viewed_episode_number: last_episode_number}, synchronize_session=False)
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
+                {TvShow.last_viewed_episode_season: last_episode_season}, synchronize_session=False)
+            self.session.commit()
+            logging.info("Episode update successful.")
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not update the last episode. Rollback done.")
 
     def update_last_viewed_date(self, show_name: str, last_viewed_date: str) -> None:
         """
@@ -150,7 +178,12 @@ class TvShowRepository:
         :param last_viewed_date: date-like string to specify the date on which the last episode was viewed
         :return: None
         """
-        self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
-            {TvShow.last_viewed_date: last_viewed_date},
-            synchronize_session=False)
-        self.session.commit()
+        try:
+            self.session.query(TvShow).filter(func.lower(TvShow.name) == show_name.lower()).update(
+                {TvShow.last_viewed_date: last_viewed_date},
+                synchronize_session=False)
+            self.session.commit()
+            logging.info("Date update successful.")
+        except exc.SQLAlchemyError:
+            self.session.rollback()
+            logging.exception("Could not update date. Rollback done.")
