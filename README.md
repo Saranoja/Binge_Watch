@@ -11,3 +11,9 @@ Usage:
 ```shell script
 $ python __main__.py
 ```
+
+Additional information:
+
+The project makes use of a PostgreSql database, whose credentials can be found and/or adapted in src/db/database_config.py.
+
+The database contains a schema named TV_Shows, whose fields can be found in src/repository/tv_show_repository.py
